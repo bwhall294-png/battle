@@ -1,0 +1,16 @@
+{
+  "name": "lake-fight-royale",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Online lake arena shooter with room lobby",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check server.js && node --check game.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  }
+}

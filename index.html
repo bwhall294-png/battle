@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lake Fight Royale Online</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel" id="lobbyPanel">
+        <h1>Lake Fight Royale Online</h1>
+        <p>Play with friends: create a room or join with a code.</p>
+
+        <div class="form-row">
+          <label for="nameInput">Name</label>
+          <input id="nameInput" maxlength="16" placeholder="Player" />
+        </div>
+
+        <div class="form-row">
+          <label for="codeInput">Room code</label>
+          <input id="codeInput" maxlength="5" placeholder="ABCDE" />
+        </div>
+
+        <div class="actions">
+          <button id="createBtn">Create Room</button>
+          <button id="joinBtn">Join Room</button>
+          <button id="refreshBtn">Refresh Rooms</button>
+        </div>
+
+        <h2>Open Rooms</h2>
+        <ul id="roomsList"></ul>
+
+        <p id="lobbyStatus"></p>
+      </section>
+
+      <section class="panel hidden" id="gamePanel">
+        <div class="topbar">
+          <div id="status"></div>
+          <div>1 Rifle • 2 Shotgun • 3 SMG</div>
+        </div>
+        <canvas id="game" width="1100" height="700" aria-label="Online lake arena"></canvas>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
