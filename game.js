@@ -9,6 +9,50 @@ const roomsList = document.getElementById("roomsList");
 const lobbyStatus = document.getElementById("lobbyStatus");
 const statusEl = document.getElementById("status");
 
+const gameGrid = document.getElementById("gameGrid");
+const gameModal = document.getElementById("gameModal");
+const modalTitle = document.getElementById("modalTitle");
+const gameFrame = document.getElementById("gameFrame");
+const newTabBtn = document.getElementById("newTabBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+const arcadeGames = [
+  { title: "2048", url: "https://cdn.htmlgames.com/2048/" },
+  { title: "Basketball Legends", url: "https://www.playpager.com/embed/basketball-legends/" },
+  { title: "Retro Bowl", url: "https://www.playpager.com/embed/retro-bowl/" },
+  { title: "Chess", url: "https://cdn.htmlgames.com/chessclassic/" },
+  { title: "Mahjong", url: "https://cdn.htmlgames.com/mahjongclassic/" }
+];
+
+let activeGameUrl = "";
+
+function openGameModal(game) {
+  activeGameUrl = game.url;
+  modalTitle.textContent = game.title;
+  gameFrame.src = game.url;
+  gameModal.classList.remove("hidden");
+}
+
+function closeGameModal() {
+  gameFrame.src = "";
+  activeGameUrl = "";
+  gameModal.classList.add("hidden");
+}
+
+function renderArcadeGames() {
+  if (!gameGrid) return;
+  gameGrid.innerHTML = "";
+  for (const game of arcadeGames) {
+    const card = document.createElement("article");
+    card.className = "game-card";
+    card.innerHTML = `<h3>${game.title}</h3><button type="button">Play</button>`;
+    card.querySelector("button").addEventListener("click", () => openGameModal(game));
+    gameGrid.appendChild(card);
+  }
+}
+
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -205,3 +249,21 @@ function loop() {
 }
 
 loop();
+
+
+closeModalBtn?.addEventListener("click", closeGameModal);
+newTabBtn?.addEventListener("click", () => {
+  if (activeGameUrl) window.open(activeGameUrl, "_blank", "noopener,noreferrer");
+});
+fullscreenBtn?.addEventListener("click", async () => {
+  if (!document.fullscreenElement) {
+    await gameFrame.requestFullscreen();
+  } else {
+    await document.exitFullscreen();
+  }
+});
+gameModal?.addEventListener("click", (event) => {
+  if (event.target === gameModal) closeGameModal();
+});
+
+renderArcadeGames();
