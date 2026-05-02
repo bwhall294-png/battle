@@ -8,6 +8,17 @@
   </head>
   <body>
     <main class="app">
+      <section class="panel" id="arcadePanel">
+        <h1>Game Portal</h1>
+        <p>Play instantly in the popup player, open in a new tab, or go fullscreen.</p>
+        <div class="actions">
+          <button type="button" disabled>🎮 Instant Play</button>
+          <button type="button" disabled>🖥️ Fullscreen Ready</button>
+          <button type="button" disabled>↗ New Tab Fallback</button>
+        </div>
+        <div class="game-grid" id="gameGrid"></div>
+      </section>
+
       <section class="panel" id="lobbyPanel">
         <h1>Lake Fight Royale Online</h1>
         <p>Play with friends: create a room or join with a code.</p>
@@ -42,6 +53,20 @@
         <canvas id="game" width="1100" height="700" aria-label="Online lake arena"></canvas>
       </section>
     </main>
+
+    <div class="modal hidden" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-content">
+        <div class="modal-topbar">
+          <h2 id="modalTitle">Game</h2>
+          <div class="actions">
+            <button id="newTabBtn">Open in New Tab</button>
+            <button id="fullscreenBtn">Fullscreen</button>
+            <button id="closeModalBtn">Close</button>
+          </div>
+        </div>
+        <iframe id="gameFrame" title="Game player" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </div>
+    </div>
 
     <script src="game.js"></script>
   </body>
